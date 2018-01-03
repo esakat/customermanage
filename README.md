@@ -6,4 +6,4 @@
 
 ---
 
-本リポジトリは『[はじめての Spring Boot](http://www.oreilly.co.jp/books/9784873117522/)』の写経プログラム置き場です。
+本リポジトリは『[はじめての Spring Boot](https://www.kohgakusha.co.jp/books/detail/978-4-7775-1969-9)』の写経プログラム置き場です。
