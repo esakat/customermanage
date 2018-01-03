@@ -5,8 +5,8 @@ import customer_manage.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 
 /**
@@ -18,8 +18,8 @@ public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
-    public Page<Customer> findAll(Pageable pageable) {
-        return customerRepository.findAllOrderByName(pageable);
+    public List<Customer> findAll() {
+        return customerRepository.findAllOrderByName();
     }
 
     public Customer findOne(Integer id) {
