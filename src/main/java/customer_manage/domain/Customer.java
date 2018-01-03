@@ -3,7 +3,6 @@ package customer_manage.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -19,8 +18,9 @@ public class Customer {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(nullable = false)
     private String firstName;
-    @Column(nullable = false)
     private String lastName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = true, name = "username")
+    private User user;
 }

@@ -4,13 +4,17 @@ spring.datasorce.sqlScriptEncodind: UTF-8
 # キャッシュ無効化
 spring.thymeleaf.cache: false
 
+# 認証を無効化
+# security.basic.enabled: false
+
 spring:
   datasource:
     driverClassName: org.h2.Driver
     # インメモリDBを使う場合
     # url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     # ローカルのファイルで永続的に保存する場合(/tmp以下に適当なファイル掘ってる)
-    url: jdbc:h2:file:tmp/customer
+    # アップデートで相対パスしか指定できなくなった
+    url: jdbc:h2:file:./tmp/customer
     username: sa
     password:
   jpa:

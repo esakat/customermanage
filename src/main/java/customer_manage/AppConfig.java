@@ -1,4 +1,4 @@
-package customer_manage;
+package com.example;
 
 import net.sf.log4jdbc.Log4jdbcProxyDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,15 +6,12 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.sql.DataSource;
-
-/**
- * Created by tom_red on 2018/01/02.
- */
 
 @Configuration
 public class AppConfig {
@@ -22,7 +19,7 @@ public class AppConfig {
     DataSourceProperties dataSourceProperties;
     DataSource dataSource;
 
-    @Bean(destroyMethod = "close")
+    @Bean
     DataSource realDataSource() {
         DataSourceBuilder factory = DataSourceBuilder
                 .create(this.dataSourceProperties.getClassLoader())
@@ -33,6 +30,7 @@ public class AppConfig {
         return this.dataSource;
     }
 
+    @Primary
     @Bean
     DataSource dataSource() {
         return new Log4jdbcProxyDataSource(this.dataSource);

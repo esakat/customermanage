@@ -2,9 +2,11 @@ package customer_manage.web;
 
 import customer_manage.domain.Customer;
 import customer_manage.service.CustomerService;
+import customer_manage.service.LoginUserDetails;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,13 +40,14 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    String create(@Validated CustomerForm form, BindingResult result, Model model) {
+    String create(@Validated CustomerForm form, BindingResult result, Model model,
+                  @AuthenticationPrincipal LoginUserDetails userDetails) {
         if(result.hasErrors()) {
             return list(model);
         }
         Customer customer = new Customer();
         BeanUtils.copyProperties(form, customer);
-        customerService.create(customer);
+        customerService.create(customer, userDetails.getUser());
         return "redirect:/customers";
     }
 
@@ -56,14 +59,15 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    String edit(@RequestParam Integer id, @Validated CustomerForm form, BindingResult result) {
+    String edit(@RequestParam Integer id, @Validated CustomerForm form, BindingResult result,
+                @AuthenticationPrincipal LoginUserDetails userDetails) {
         if(result.hasErrors()) {
             return editForm(id, form);
         }
         Customer customer = new Customer();
         BeanUtils.copyProperties(form, customer);
         customer.setId(id);
-        customerService.update(customer);
+        customerService.update(customer, userDetails.getUser());
         return "redirect:/customers";
     }
 

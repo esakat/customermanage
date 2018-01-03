@@ -1,6 +1,7 @@
 package customer_manage.service;
 
 import customer_manage.domain.Customer;
+import customer_manage.domain.User;
 import customer_manage.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,13 @@ public class CustomerService {
         return customerRepository.findOne(id);
     }
 
-    public Customer create(Customer customer) {
+    public Customer create(Customer customer, User user) {
+        customer.setUser(user);
         return customerRepository.save(customer);
     }
 
-    public  Customer update(Customer customer) {
+    public  Customer update(Customer customer, User user) {
+        customer.setUser(user);
         return customerRepository.save(customer);
     }
 
