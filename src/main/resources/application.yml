@@ -8,8 +8,10 @@ spring:
   datasource:
     driverClassName: org.h2.Driver
     # インメモリDBを使う場合
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    # url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     # ローカルのファイルで永続的に保存する場合(/tmp以下に適当なファイル掘ってる)
-    # url: jdbc:h2:file:tmp/testdb
+    url: jdbc:h2:file:tmp/customer
     username: sa
     password:
+  jpa:
+    hibernate.ddl-auto: validate
